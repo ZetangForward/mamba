@@ -176,6 +176,7 @@ class MambaBlock(nn.Module):
     
         return y
     
+    
 class MambaPreTrainedModel(PreTrainedModel):
     config_class = MambaConfig
     base_model_prefix = "model"
@@ -192,6 +193,7 @@ class MambaPreTrainedModel(PreTrainedModel):
             module.weight.data.normal_(mean=0.0, std=std)
             if module.padding_idx is not None:
                 module.weight.data[module.padding_idx].zero_()
+
 
 class MambaModel(MambaPreTrainedModel):
     def __init__(self, config: MambaConfig):
@@ -233,6 +235,7 @@ class MambaModel(MambaPreTrainedModel):
             last_hidden_state=hidden_states,
             hidden_states=all_hidden_states,
         )
+    
 class MambaForCausalLM(MambaPreTrainedModel):
     _tied_weights_keys = ["lm_head.weight"]
 
